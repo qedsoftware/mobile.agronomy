@@ -3,6 +3,7 @@ package com.afsis.yieldestimator.views;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 
 import com.afsis.yieldestimator.R;
 
-public class ResultsActivity extends ActionBarActivity {
+public class ResultsActivity extends AppCompatActivity {
 
     private static final String TAG = "ResultsActivity";
 
@@ -20,7 +21,6 @@ public class ResultsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_results);
         Intent i = getIntent();
         // TODO: Exception handling?
-        Log.d(TAG, "At onActivityResult, setting result");
         String yieldEstimate = i.getStringExtra(MainActivity.MAIZE_YIELD_ESTIMATE);
         TextView txtResult = (TextView) findViewById(R.id.txtYield);
         txtResult.setText(yieldEstimate);

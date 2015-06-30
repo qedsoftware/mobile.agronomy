@@ -2,7 +2,7 @@ package com.afsis.yieldestimator.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
 import com.afsis.yieldestimator.crops.MaizeGrowthStage;
@@ -23,15 +24,23 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static String MAIZE_YIELD_ESTIMATE = "maizeYieldEstimate";
+    private double lat = 0;
+    private double lon = 0;
+    private long timestamp = 0;
+    private float accuracy = 0;
+    private boolean autoRefreshOn = false;
+    private boolean validData = false;
+    private static int AUTO_REFRESH_TIME = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLayout();
+
     }
 
     private void initLayout() {
@@ -49,13 +58,11 @@ public class MainActivity extends ActionBarActivity {
                 EditText txtRowsPerCob = (EditText) findViewById(R.id.txtRowsPerCob);
                 EditText txtKernelsPerRow = (EditText) findViewById(R.id.txtKernelsPerRow);
                 Spinner spinGrowthStage = (Spinner) findViewById(R.id.spinGrowthStage);
-
                 Maize maize = new Maize();
                 String cobs = txtCobsPerUnitArea.getText().toString().trim();
                 String rows = txtRowsPerCob.getText().toString().trim();
                 String kernels = txtKernelsPerRow.getText().toString().trim();
                 MaizeGrowthStage stage = (MaizeGrowthStage) spinGrowthStage.getSelectedItem();
-
                 if (cobs.isEmpty() || rows.isEmpty() || kernels.isEmpty() || stage == null) {
                     Notifier.showToastMessage(getApplicationContext(), ErrorManager.errFieldsEmpty);
                 } else {
@@ -74,7 +81,6 @@ public class MainActivity extends ActionBarActivity {
         // Switch activity
         Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
         i.putExtra(MAIZE_YIELD_ESTIMATE, String.valueOf(yield));
-        Log.d(getClass().toString(), "Received click, processing");
         startActivity(i);
     }
 
@@ -87,9 +93,9 @@ public class MainActivity extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = (Spinner) findViewById(R.id.spinGrowthStage);
         sItems.setAdapter(adapter);
-        // Set a default value
         // TODO: default?
         // TODO: show drop down downwards
+        // Set a default value
         sItems.setSelection(adapter.getPosition(MaizeGrowthStage.R1));
     }
 

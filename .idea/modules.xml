@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YieldEstimator.iml" filepath="$PROJECT_DIR$/YieldEstimator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gssid/gssid.iml" filepath="$PROJECT_DIR$/gssid/gssid.iml" />
     </modules>
   </component>
 </project>
