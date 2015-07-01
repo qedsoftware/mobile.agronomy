@@ -4,4 +4,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_results">ResultsActivity</string>
+    <string name="LAT">lat</string>
+    <string name="LON">lon</string>
+    <string name="TIMESTAMP">timestamp</string>
+    <string name="ACCURACY">accuracy</string>
+    <string name="VALIDDATA">validData</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.afsis.yieldestimator.views;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -27,20 +29,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static String MAIZE_YIELD_ESTIMATE = "maizeYieldEstimate";
-    private double lat = 0;
-    private double lon = 0;
-    private long timestamp = 0;
-    private float accuracy = 0;
-    private boolean autoRefreshOn = false;
-    private boolean validData = false;
-    private static int AUTO_REFRESH_TIME = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLayout();
-
     }
 
     private void initLayout() {
@@ -120,5 +114,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 }
+
+
 
