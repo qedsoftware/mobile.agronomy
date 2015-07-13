@@ -1,7 +1,9 @@
 package com.afsis.yieldestimator.crops;
 
 
-public class Maize extends Crop {
+import java.io.Serializable;
+
+public class Maize extends Crop implements Serializable {
 
     private int cobsPerUnitArea;
     private int rowsPerCob;

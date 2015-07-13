@@ -3,11 +3,13 @@ package com.afsis.yieldestimator.views;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,8 +22,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.R;
+import com.afsis.yieldestimator.crops.Maize;
+import com.afsis.yieldestimator.db.ServerAccessor;
+import com.afsis.yieldestimator.db.ServerAccessorCallback;
+import com.afsis.yieldestimator.db.ServerAccessorException;
 import com.afsis.yieldestimator.util.ErrorManager;
+import com.afsis.yieldestimator.util.LabelManager;
+import com.afsis.yieldestimator.util.Notifier;
+import com.parse.SaveCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,8 +50,8 @@ public class ResultsActivity extends AppCompatActivity {
     private boolean isLocationDataValid = false;
 
     private ProgressBar refreshProgress;
-    private ToggleButton autoRefreshToggle;
-    private TextView lblLatlon;
+    private ToggleButton btnToggleAutoRefresh;
+    private TextView lblLatLon;
     private TextView lblAccuracy;
     private TextView lblTime;
     private RadioGroup radioGroupSoilSample;
@@ -49,31 +59,40 @@ public class ResultsActivity extends AppCompatActivity {
 
     private MyLocationManager locationManager;
     private LocationListener locationListener;
+    private Maize maize;
+
+    private ServerAccessor serverAccessor = new ServerAccessor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+
+        // Retrieve extras, maize yield object from previous acitivy
         Intent i = getIntent();
-        String yieldEstimate = i.getStringExtra(MainActivity.MAIZE_YIELD_ESTIMATE);
+        maize = (Maize) i.getExtras().getSerializable(MainActivity.MAIZE_DATA);
+        double yieldEstimate = maize.estimateYield();
         TextView txtResult = (TextView) findViewById(R.id.txtYield);
-        txtResult.setText(yieldEstimate);
+        txtResult.setText(String.valueOf(yieldEstimate));
+
+        // Get handles to views from UI
         getViewsForInteraction();
+
         // Restore instance state from last run of activity
         restoreInstanceState(savedInstanceState);
     }
 
     private void getViewsForInteraction() {
-        // Get the views we want to interact with.
         refreshProgress = (ProgressBar) findViewById(R.id.refreshProgress);
-        autoRefreshToggle = (ToggleButton) findViewById(R.id.autoRefresh);
-        lblLatlon = (TextView) findViewById(R.id.txtLatlon);
+        btnToggleAutoRefresh = (ToggleButton) findViewById(R.id.autoRefresh);
+        lblLatLon = (TextView) findViewById(R.id.txtLatlon);
         lblAccuracy = (TextView) findViewById(R.id.txtAccuracy);
         lblTime = (TextView) findViewById(R.id.txtTime);
         radioGroupSoilSample = (RadioGroup) findViewById(R.id.radGrpSampleDepth);
         btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setEnabled(isLocationDataValid);
-        isAutoRefreshSelected = autoRefreshToggle.isChecked();
+        isAutoRefreshSelected = btnToggleAutoRefresh.isChecked();
+
         locationManager = new MyLocationManager();
         locationListener = new MyLocationListener();
 
@@ -122,7 +141,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         if (!isLocationDataValid) {
             isAutoRefreshSelected = true;
-            autoRefreshToggle.setChecked(true);
+            btnToggleAutoRefresh.setChecked(true);
         }
         // Start location updates when activity starts the first time
         // and or resumes after interruption
@@ -191,8 +210,8 @@ public class ResultsActivity extends AppCompatActivity {
 
     private void updateTextViews() {
         if (isLocationDataValid) {
-            lblLatlon.setText(String.format("%01.5f, %01.5f", lat, lon));
-            lblLatlon.setTypeface(null, Typeface.NORMAL);
+            lblLatLon.setText(String.format("%01.5f, %01.5f", lat, lon));
+            lblLatLon.setTypeface(null, Typeface.NORMAL);
             lblAccuracy.setText(String.format("%01.1f meters", accuracy));
             lblAccuracy.setTypeface(null, Typeface.NORMAL);
             Date date = new Date(timestamp);
@@ -200,14 +219,53 @@ public class ResultsActivity extends AppCompatActivity {
             lblTime.setText(format.format(date));
             lblTime.setTypeface(null, Typeface.NORMAL);
         } else {
-            lblLatlon.setText("n/a");
+            lblLatLon.setText("n/a");
             lblAccuracy.setText("n/a");
             lblTime.setText("n/a");
         }
     }
 
     public void onSaveClicked(View view) {
+        int sampleDepth = 0;
+        int sampleExtension = 0;
+        // TODO: Take values from shared preferences
+        if (radioGroupSoilSample.getCheckedRadioButtonId() == R.id.topSoil) {
+        } else if (radioGroupSoilSample.getCheckedRadioButtonId() == R.id.subSoil) {
+        }
+        GSSID gssid = new GSSID(lat, lon, timestamp, sampleDepth, sampleExtension);
+        saveMaizeYieldEstimate(gssid, maize);
+        saveSoilSampleData(gssid,lat,lon,timestamp,sampleDepth, sampleExtension);
+        // TODO: Show GSSID on new screen? Show Tag History?
+    }
 
+    private void saveSoilSampleData(GSSID gssid,double latitude, double longitude, long timestamp, int sampleDepth, int sampleExtension) {
+        serverAccessor.saveSoilSampleData(gssid, latitude, longitude, sampleDepth, sampleExtension, timestamp, new ServerAccessorCallback() {
+            @Override
+            public void onSuccess() {
+                Notifier.showToastMessage(getApplicationContext(), LabelManager.soilUpdateSuccess);
+            }
+
+            @Override
+            public void onFailure() {
+                Notifier.showToastMessage(getApplicationContext(), ErrorManager.errSoilSampleUpdateFailed);
+            }
+        });
+    }
+
+    private void saveMaizeYieldEstimate(GSSID gssid, Maize maize) {
+        Notifier.showToastMessage(getApplicationContext(), ""+ gssid.geohash().toLatLon().lat());
+        serverAccessor.saveMaizeYieldData(gssid, lat, lon, timestamp, maize, new ServerAccessorCallback() {
+            @Override
+            public void onSuccess() {
+                Notifier.showToastMessage(getApplicationContext(), LabelManager.yieldUpdateSuccess);
+
+            }
+
+            @Override
+            public void onFailure() {
+                Notifier.showToastMessage(getApplicationContext(), ErrorManager.errYieldUpdateFailed);
+            }
+        });
     }
 
     private class MyLocationListener implements LocationListener {
@@ -225,19 +283,13 @@ public class ResultsActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
 
         @Override
-        public void onProviderEnabled(String provider) {
-
-        }
+        public void onProviderEnabled(String provider) {}
 
         @Override
-        public void onProviderDisabled(String provider) {
-
-        }
+        public void onProviderDisabled(String provider) {}
     }
 
     private class MyLocationManager {

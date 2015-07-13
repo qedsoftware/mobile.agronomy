@@ -20,6 +20,7 @@ import com.afsis.yieldestimator.crops.Maize;
 import com.afsis.yieldestimator.crops.MaizeGrowthStage;
 import com.afsis.yieldestimator.util.ErrorManager;
 import com.afsis.yieldestimator.util.Notifier;
+import com.parse.Parse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,13 +29,19 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String MAIZE_YIELD_ESTIMATE = "maizeYieldEstimate";
+    public static String MAIZE_DATA = "maizeData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLayout();
+        initParse();
+    }
+
+    private void initParse() {
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "insert app id", "insert client key");
     }
 
     private void initLayout() {
@@ -65,16 +72,16 @@ public class MainActivity extends AppCompatActivity {
                     maize.setRowsPerCob(Integer.parseInt(rows));
                     maize.setKernelsPerRow(Integer.parseInt(kernels));
                     maize.setGrowthStage(stage);
-                    renderResult(maize.estimateYield());
+                    renderResult(maize);
                 }
             }
         });
     }
 
-    private void renderResult(double yield) {
+    private void renderResult(Maize maize) {
         // Switch activity
         Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
-        i.putExtra(MAIZE_YIELD_ESTIMATE, String.valueOf(yield));
+        i.putExtra(MAIZE_DATA, maize);
         startActivity(i);
     }
 

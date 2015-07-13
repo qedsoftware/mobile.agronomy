@@ -25,10 +25,6 @@ public enum MaizeGrowthStage implements GrowthStage {
         this.adjustmentFactor = adjustmentFactor;
     }
 
-    public String getGrowthStage() {
-        return growthStage;
-    }
-
     public double getAdjustmentFactor() {
         return adjustmentFactor;
     }
