@@ -22,6 +22,7 @@ import com.afsis.yieldestimator.util.ErrorManager;
 import com.afsis.yieldestimator.util.Notifier;
 import com.parse.Parse;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,18 +31,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static String MAIZE_DATA = "maizeData";
+    private static final String TAG = MainActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLayout();
-        initParse();
-    }
-
-    private void initParse() {
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "insert app id", "insert client key");
     }
 
     private void initLayout() {
@@ -59,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
                 EditText txtRowsPerCob = (EditText) findViewById(R.id.txtRowsPerCob);
                 EditText txtKernelsPerRow = (EditText) findViewById(R.id.txtKernelsPerRow);
                 Spinner spinGrowthStage = (Spinner) findViewById(R.id.spinGrowthStage);
+//                try {
+//                    Field popup = Spinner.class.getDeclaredField("mPopup");
+//                    popup.setAccessible(true);
+//                    android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(spinGrowthStage);
+//                    popupWindow.setHeight(50);
+//                }
+//                catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+//                    Log.d(TAG, "Failed to change popup height: ", e);
+//                }
                 Maize maize = new Maize();
                 String cobs = txtCobsPerUnitArea.getText().toString().trim();
                 String rows = txtRowsPerCob.getText().toString().trim();
@@ -105,14 +110,18 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent intent = null;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

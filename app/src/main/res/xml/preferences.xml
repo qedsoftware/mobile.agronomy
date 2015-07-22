@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pref_sample_depth"
+        android:key="pref_sample_depth_settings">
+
+        <EditTextPreference
+            android:key="top_soil_depth"
+            android:title="@string/pref_title_top_soil_depth"
+            android:defaultValue="0"
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLines="1" />
+        <EditTextPreference
+            android:key="top_soil_extension"
+            android:title="@string/pref_title_top_soil_extension"
+            android:defaultValue="25"
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLines="1" />
+        <EditTextPreference
+            android:key="sub_soil_depth"
+            android:title="@string/pref_title_sub_soil_depth"
+            android:defaultValue="0"
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLines="1" />
+        <EditTextPreference
+            android:key="sub_soil_extension"
+            android:title="@string/pref_title_sub_soil_extension"
+            android:defaultValue="0"
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLines="1" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

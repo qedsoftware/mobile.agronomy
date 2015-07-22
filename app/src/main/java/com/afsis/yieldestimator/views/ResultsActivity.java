@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
@@ -32,7 +31,6 @@ import com.afsis.yieldestimator.util.ErrorManager;
 import com.afsis.yieldestimator.util.LabelManager;
 import com.afsis.yieldestimator.util.Notifier;
 import com.parse.SaveCallback;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -178,14 +176,18 @@ public class ResultsActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent intent = null;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void onAutoRefreshClicked(View view) {
@@ -228,9 +230,15 @@ public class ResultsActivity extends AppCompatActivity {
     public void onSaveClicked(View view) {
         int sampleDepth = 0;
         int sampleExtension = 0;
-        // TODO: Take values from shared preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         if (radioGroupSoilSample.getCheckedRadioButtonId() == R.id.topSoil) {
+            sampleDepth = Integer.valueOf(sharedPref.getString(SettingsActivity.TOP_SOIL_DEPTH, "0"));
+            sampleExtension =
+                    Integer.valueOf(sharedPref.getString(SettingsActivity.TOP_SOIL_EXTENSION, "25"));
         } else if (radioGroupSoilSample.getCheckedRadioButtonId() == R.id.subSoil) {
+            sampleDepth = Integer.valueOf(sharedPref.getString(SettingsActivity.SUB_SOIL_DEPTH, "25"));
+            sampleExtension =
+                    Integer.valueOf(sharedPref.getString(SettingsActivity.SUB_SOIL_EXTENSION, "25"));
         }
         GSSID gssid = new GSSID(lat, lon, timestamp, sampleDepth, sampleExtension);
         saveMaizeYieldEstimate(gssid, maize);
@@ -253,12 +261,10 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void saveMaizeYieldEstimate(GSSID gssid, Maize maize) {
-        Notifier.showToastMessage(getApplicationContext(), ""+ gssid.geohash().toLatLon().lat());
         serverAccessor.saveMaizeYieldData(gssid, lat, lon, timestamp, maize, new ServerAccessorCallback() {
             @Override
             public void onSuccess() {
                 Notifier.showToastMessage(getApplicationContext(), LabelManager.yieldUpdateSuccess);
-
             }
 
             @Override
