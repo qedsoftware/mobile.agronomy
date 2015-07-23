@@ -32,3 +32,15 @@ Design Constraints
 ------------------
 + Use an OOP-design that will allow us to easily switch the crop of interest in the future, from maize to bananas or cassava trees.
 + Try using Parse for the back-end.
+
+Directions installing APK on Device
+----------------------------------
+In case you wish to install the APK on your device, follow these steps:
+
+1. Create an account on Parse
+2. Create a new app on Parse
+3. Open ParseApplication.java, and replace app-id with the newly created application's ID and app-key with your app's key.
+4. Build APK and deploy APK on your device
+
+You should be able to check the data being pushed on Parse Core.
+
