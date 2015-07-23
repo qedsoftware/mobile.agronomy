@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yield Estimator</string>
+    <string name="app_name">AfSIS Yield Estimator</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_results">Results</string>
@@ -14,4 +14,12 @@
     <string name="pref_title_top_soil_extension">Top Soil Extension</string>
     <string name="pref_title_sub_soil_depth">Sub Soil Depth</string>
     <string name="pref_title_sub_soil_extension">Sub Soil Extension</string>
+
+    <string name="title_activity_growth_stage_image">Identifying Growth Stage</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_welcome"></string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
 </resources>

@@ -12,19 +12,19 @@
     <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
-        android:layout_weight="0.8">
+        android:layout_weight="0.5">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:stretchColumns="1">
-
                 <TableRow>
 
                     <TextView
@@ -78,15 +78,35 @@
                     <Spinner
                         android:id="@+id/spinGrowthStage"
                         android:layout_width="fill_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="fill_parent"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btStageImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/ic_action"
+                        android:focusable="true"
+                        />
                 </TableRow>
             </TableLayout>
 
-            <Button
-                android:id="@+id/btnSubmit"
-                android:text="Go"
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"></Button>
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:paddingTop="80dp">
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:text="Get Estimate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
 
         <!-- 70% Width End-->

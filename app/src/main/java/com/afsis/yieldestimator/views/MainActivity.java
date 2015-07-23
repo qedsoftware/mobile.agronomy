@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.africasoils.gssid.GSSID;
@@ -46,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setClickHandlers() {
+
         Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        ImageButton btnStageImg = (ImageButton) findViewById(R.id.btStageImg);
+
         btnSubmit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,15 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 EditText txtRowsPerCob = (EditText) findViewById(R.id.txtRowsPerCob);
                 EditText txtKernelsPerRow = (EditText) findViewById(R.id.txtKernelsPerRow);
                 Spinner spinGrowthStage = (Spinner) findViewById(R.id.spinGrowthStage);
-//                try {
-//                    Field popup = Spinner.class.getDeclaredField("mPopup");
-//                    popup.setAccessible(true);
-//                    android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(spinGrowthStage);
-//                    popupWindow.setHeight(50);
-//                }
-//                catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
-//                    Log.d(TAG, "Failed to change popup height: ", e);
-//                }
                 Maize maize = new Maize();
                 String cobs = txtCobsPerUnitArea.getText().toString().trim();
                 String rows = txtRowsPerCob.getText().toString().trim();
@@ -81,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnStageImg.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GrowthStageImageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void renderResult(Maize maize) {
@@ -93,16 +97,28 @@ public class MainActivity extends AppCompatActivity {
     private void renderSpinner() {
         List<MaizeGrowthStage> lstSpinner = new ArrayList<>();
         lstSpinner.addAll(Arrays.asList(MaizeGrowthStage.values()));
+
         // Create spinner adapter
-        ArrayAdapter<MaizeGrowthStage> adapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_spinner_item, lstSpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<MaizeGrowthStage> customAdapter = new ArrayAdapter<MaizeGrowthStage>(this,
+                android.R.layout.simple_spinner_item) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                convertView = super.getDropDownView(position, convertView, parent);
+                convertView.setVisibility(View.VISIBLE);
+                ViewGroup.LayoutParams p = convertView.getLayoutParams();
+                // Hack to change the height of the drop down, so that it is displayed downward
+                //  TODO: change to something cleaner?
+                p.height = 65;
+                convertView.setLayoutParams(p);
+                return convertView;
+            }
+        };
+
+        customAdapter.addAll(lstSpinner);
         Spinner sItems = (Spinner) findViewById(R.id.spinGrowthStage);
-        sItems.setAdapter(adapter);
-        // TODO: default?
-        // TODO: show drop down downwards
+        sItems.setAdapter(customAdapter);
         // Set a default value
-        sItems.setSelection(adapter.getPosition(MaizeGrowthStage.R1));
+        sItems.setSelection(customAdapter.getPosition(MaizeGrowthStage.R1));
     }
 
     @Override
