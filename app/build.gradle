@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "22.0.0"
 
     defaultConfig {
         applicationId "com.afsis.yieldestimator"
@@ -23,9 +23,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':gssid')
-    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.android.support:support-v4:22.2.0'
 }
 
