@@ -24,6 +24,7 @@
 
                     <TextView
                         android:text="@string/cobs_per_area"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:padding="6dip" />
                     <!--<NumberPicker-->
                     <!--android:id="@+id/npCobsPerUnitArea"-->
@@ -41,6 +42,7 @@
 
                     <TextView
                         android:text="@string/rows_per_cob"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:padding="6dip" />
 
                     <EditText
@@ -55,6 +57,7 @@
 
                     <TextView
                         android:text="@string/kernels_per_row"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:padding="6dip" />
 
                     <EditText
@@ -68,6 +71,7 @@
 
                     <TextView
                         android:text="@string/growth_stage"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:padding="6dip" />
 
                     <Spinner
