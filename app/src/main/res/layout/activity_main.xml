@@ -83,8 +83,9 @@
                     <ImageButton
                         android:id="@+id/btStageImg"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/ic_action"
+                        android:scaleType="centerInside"
                         android:focusable="true"
                         />
                 </TableRow>
