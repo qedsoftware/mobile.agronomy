@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.afsis.yieldestimator.views.ResultsActivity"
+    tools:context="com.afsis.yieldestimator.activity.ResultsActivity"
     android:padding="16dp"
     android:orientation="vertical">
 

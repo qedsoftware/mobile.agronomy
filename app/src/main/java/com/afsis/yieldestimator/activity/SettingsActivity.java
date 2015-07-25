@@ -1,4 +1,4 @@
-package com.afsis.yieldestimator.views;
+package com.afsis.yieldestimator.activity;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import com.afsis.yieldestimator.R;
  * the list of settings.
  * <p/>
  * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
+ * Android Desig    n: Settings</a> for design guidelines and the <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */

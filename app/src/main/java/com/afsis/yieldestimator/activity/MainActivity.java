@@ -1,11 +1,8 @@
-package com.afsis.yieldestimator.views;
+package com.afsis.yieldestimator.activity;
 
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,15 +13,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
 import com.afsis.yieldestimator.crops.MaizeGrowthStage;
 import com.afsis.yieldestimator.util.ErrorManager;
 import com.afsis.yieldestimator.util.Notifier;
-import com.parse.Parse;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -16,44 +16,43 @@
         android:required="true" />
 
     <application
-        android:name=".util.ParseApplication"
+        android:name=".YieldEstimatorApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_custom"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".views.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".views.ResultsActivity"
-            android:label="@string/title_activity_results" >
+            android:name=".activity.ResultsActivity"
+            android:label="@string/title_activity_results"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".views.SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".views.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".views.GrowthStageImageActivity"
+            android:name=".activity.GrowthStageImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_growth_stage_image"
-            android:theme="@style/FullscreenTheme" >
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".views.WelcomeActivity"
+            android:name=".activity.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

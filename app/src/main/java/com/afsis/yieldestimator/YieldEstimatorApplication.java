@@ -1,15 +1,14 @@
-package com.afsis.yieldestimator.util;
+package com.afsis.yieldestimator;
 
 import android.app.Application;
 
-import com.afsis.yieldestimator.R;
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
 
 /**
  * Maintain global Parse application state
  */
-public class ParseApplication extends Application {
+public class YieldEstimatorApplication extends Application {
 
     @Override
     public void onCreate() {

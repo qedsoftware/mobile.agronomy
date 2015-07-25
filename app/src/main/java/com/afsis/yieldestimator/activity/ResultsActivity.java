@@ -1,4 +1,4 @@
-package com.afsis.yieldestimator.views;
+package com.afsis.yieldestimator.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -26,11 +26,10 @@ import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
 import com.afsis.yieldestimator.db.ServerAccessor;
 import com.afsis.yieldestimator.db.ServerAccessorCallback;
-import com.afsis.yieldestimator.db.ServerAccessorException;
 import com.afsis.yieldestimator.util.ErrorManager;
 import com.afsis.yieldestimator.util.LabelManager;
 import com.afsis.yieldestimator.util.Notifier;
-import com.parse.SaveCallback;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

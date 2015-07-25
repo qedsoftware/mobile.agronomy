@@ -2,17 +2,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/layoutContainer"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/large_padding">
 
     <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.10"></RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -109,11 +104,6 @@
 
         </LinearLayout>
 
-        <!-- 70% Width End-->
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.10"></RelativeLayout>
 </LinearLayout>
