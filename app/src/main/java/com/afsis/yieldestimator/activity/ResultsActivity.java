@@ -11,16 +11,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
 import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
@@ -31,7 +29,7 @@ import com.afsis.yieldestimator.util.Notifier;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ResultsActivity extends AppCompatActivity {
+public class ResultsActivity extends SuperActivity {
 
     private static final String TAG = ResultsActivity.class.getName();
 
@@ -159,32 +157,6 @@ public class ResultsActivity extends AppCompatActivity {
             })
             .create();
         dialog.show();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_results, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Intent intent = null;
-
-        switch (item.getItemId()) {
-
-            case R.id.action_settings:
-                intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     public void onAutoRefreshClicked(View view) {
