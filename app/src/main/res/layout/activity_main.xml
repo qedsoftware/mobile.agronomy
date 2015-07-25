@@ -23,7 +23,7 @@
                 <TableRow>
 
                     <TextView
-                        android:text="Cobs Per Unit Area"
+                        android:text="@string/cobs_per_area"
                         android:padding="6dip" />
                     <!--<NumberPicker-->
                     <!--android:id="@+id/npCobsPerUnitArea"-->
@@ -40,7 +40,7 @@
                 <TableRow>
 
                     <TextView
-                        android:text="Rows Per Cob"
+                        android:text="@string/rows_per_cob"
                         android:padding="6dip" />
 
                     <EditText
@@ -54,7 +54,7 @@
                 <TableRow>
 
                     <TextView
-                        android:text="Kernels Per Row"
+                        android:text="@string/kernels_per_row"
                         android:padding="6dip" />
 
                     <EditText
@@ -67,7 +67,7 @@
                 <TableRow>
 
                     <TextView
-                        android:text="Growth Stage"
+                        android:text="@string/growth_stage"
                         android:padding="6dip" />
 
                     <Spinner
@@ -80,7 +80,6 @@
                         android:id="@+id/btStageImg"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
                         android:background="@drawable/ic_action"
                         android:focusable="true"
                         />
@@ -90,13 +89,12 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:paddingTop="80dp">
                 <Button
                     android:id="@+id/btnSubmit"
-                    android:text="Get Estimate"
+                    android:text="@string/get_estimate"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />

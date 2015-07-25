@@ -14,10 +14,10 @@
         <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New ToggleButton"
             android:id="@+id/autoRefresh"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:checked="true"
             android:onClick="onAutoRefreshClicked"/>
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="GPS Polling"
+            android:text="@string/gps_polling"
             android:id="@+id/autoRefreshLabel"
             android:gravity="center"
             android:layout_alignTop="@id/autoRefresh"
@@ -36,9 +36,9 @@
             style="?android:attr/progressBarStyleSmall"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/autoRefresh"
-            android:layout_alignBottom="@+id/autoRefresh"
-            android:layout_toLeftOf="@+id/autoRefreshLabel"
+            android:layout_alignTop="@id/autoRefresh"
+            android:layout_alignBottom="@id/autoRefresh"
+            android:layout_toLeftOf="@id/autoRefreshLabel"
             android:id="@+id/refreshProgress"
             android:indeterminate="true"
             android:visibility="invisible" />
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Yield"
+        android:text="@string/yield"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
@@ -61,22 +61,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Estimate"
+            android:text="@string/estimate"
             />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
             android:id="@+id/txtYield"
-            android:gravity="right"/>
+            android:gravity="end"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Location"
+        android:text="@string/location"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
@@ -89,16 +88,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Lat/Lon"
+            android:text="@string/lat_lon"
             />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
             android:id="@+id/txtLatlon"
-            android:gravity="right"/>
+            android:gravity="end"/>
     </LinearLayout>
 
     <LinearLayout
@@ -110,22 +108,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Accuracy"/>
+            android:text="@string/accuracy_label"/>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
             android:id="@+id/txtAccuracy"
-            android:gravity="right"/>
+            android:gravity="end"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Time"
+        android:text="@string/time"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
@@ -133,7 +130,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
         android:id="@+id/txtTime"
         android:gravity="center_horizontal"/>
 
@@ -141,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sample Depth"
+        android:text="@string/sample_depth"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
@@ -154,27 +150,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="No Tag"
+            android:text="@string/no_tag"
             android:id="@+id/noTag"
             android:checked="true"/>
         <RadioButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Top Soil"
+            android:text="@string/top_soil"
             android:id="@+id/topSoil"/>
         <RadioButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sub Soil"
+            android:text="@string/sub_soil"
             android:id="@+id/subSoil"/>
     </RadioGroup>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:enabled="false"
         android:id="@+id/btnSave"
         android:onClick="onSaveClicked"

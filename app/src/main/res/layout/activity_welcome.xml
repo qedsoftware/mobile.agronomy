@@ -1,14 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#ffffff" android:id="@+id/welcome"
-    tools:context="com.afsis.yieldestimator.activity.WelcomeActivity" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:id="@+id/welcome" >
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <ImageView android:id="@+id/fullscreen_content" android:layout_width="150dp"
-        android:layout_height="150dp" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
-        android:src="@drawable/afsis" android:layout_gravity="center" />
+    <ImageView android:id="@+id/fullscreen_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/afsis"
+        android:layout_gravity="center" />
 
 </FrameLayout>

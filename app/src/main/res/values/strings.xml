@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">AfSIS Yield Estimator</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_results">Results</string>
-    <string name="LAT">lat</string>
-    <string name="LON">lon</string>
-    <string name="TIMESTAMP">timestamp</string>
-    <string name="ACCURACY">accuracy</string>
-    <string name="VALIDDATA">validData</string>
+    <string name="lat">lat</string>
+    <string name="lon">lon</string>
+    <string name="timestamp">timestamp</string>
+    <string name="accuracy">accuracy</string>
+    <string name="valid_data">validData</string>
     <string name="title_activity_settings">Settings</string>
     <string name="pref_sample_depth">Sample Depth</string>
     <string name="pref_title_top_soil_depth">Top Soil Depth</string>
@@ -16,8 +15,33 @@
     <string name="pref_title_sub_soil_extension">Sub Soil Extension</string>
 
     <string name="title_activity_growth_stage_image">Identifying Growth Stage</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+
+    <string name="err_fields_empty">Please enter the required fields</string>
+    <string name="err_gps_disabled">GPS must be enabled to use this application</string>
+    <string name="err_yield_update_failed">Oops, There was an error saving the yield data</string>
+    <string name="err_soil_sample_update_failed">Oops, There was an error saving the soil sample data</string>
+    <string name="yield_update_success">Maize yield data saved successfully</string>
+    <string name="soil_update_success">Soil sample data saved successfully</string>
+
+    <string name="ok">Ok</string>
+    <string name="n_a">n/a</string>
+    <string name="sample_depth">Sample Depth</string>
+    <string name="time">Time</string>
+    <string name="no_tag">No Tag</string>
+    <string name="top_soil">Top Soil</string>
+    <string name="sub_soil">Sub Soil</string>
+    <string name="save">Save</string>
+    <string name="accuracy_label">Accuracy</string>
+    <string name="lat_lon">Lat/Lon</string>
+    <string name="location">Location</string>
+    <string name="estimate">Estimate</string>
+    <string name="yield">Yield</string>
+    <string name="gps_polling">GPS Polling</string>
+    <string name="cobs_per_area">Cobs Per Unit Area</string>
+    <string name="rows_per_cob">Rows Per Cob</string>
+    <string name="kernels_per_row">Kernels Per Row</string>
+    <string name="growth_stage">Growth Stage</string>
+    <string name="get_estimate">Get Estimate</string>
 </resources>

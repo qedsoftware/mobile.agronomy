@@ -26,8 +26,6 @@ import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
 import com.afsis.yieldestimator.db.ServerAccessor;
 import com.afsis.yieldestimator.db.ServerAccessorCallback;
-import com.afsis.yieldestimator.util.ErrorManager;
-import com.afsis.yieldestimator.util.LabelManager;
 import com.afsis.yieldestimator.util.Notifier;
 
 import java.text.SimpleDateFormat;
@@ -97,11 +95,11 @@ public class ResultsActivity extends AppCompatActivity {
 
     private void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            lat = savedInstanceState.getDouble(getString(R.string.LAT));
-            lon = savedInstanceState.getDouble(getString(R.string.LON));
-            timestamp = savedInstanceState.getLong(getString(R.string.TIMESTAMP));
-            accuracy = savedInstanceState.getFloat(getString(R.string.ACCURACY));
-            isLocationDataValid = savedInstanceState.getBoolean(getString(R.string.VALIDDATA));
+            lat = savedInstanceState.getDouble(getString(R.string.lat));
+            lon = savedInstanceState.getDouble(getString(R.string.lon));
+            timestamp = savedInstanceState.getLong(getString(R.string.timestamp));
+            accuracy = savedInstanceState.getFloat(getString(R.string.accuracy));
+            isLocationDataValid = savedInstanceState.getBoolean(getString(R.string.valid_data));
         }
     }
 
@@ -109,11 +107,11 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save instance state for retrieval upon activity recreation
-        savedInstanceState.putDouble(getString(R.string.LAT), lat);
-        savedInstanceState.putDouble(getString(R.string.LON), lon);
-        savedInstanceState.putLong(getString(R.string.TIMESTAMP), timestamp);
-        savedInstanceState.putFloat(getString(R.string.ACCURACY), accuracy);
-        savedInstanceState.putBoolean(getString(R.string.VALIDDATA), isLocationDataValid);
+        savedInstanceState.putDouble(getString(R.string.lat), lat);
+        savedInstanceState.putDouble(getString(R.string.lon), lon);
+        savedInstanceState.putLong(getString(R.string.timestamp), timestamp);
+        savedInstanceState.putFloat(getString(R.string.accuracy), accuracy);
+        savedInstanceState.putBoolean(getString(R.string.valid_data), isLocationDataValid);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -149,18 +147,18 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void handleGPSDisabled() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage(ErrorManager.errGpsDisabled);
-        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Navigate the user to location settings
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        });
-        AlertDialog alert = dialog.create();
-        alert.show();
+        AlertDialog dialog = new AlertDialog.Builder(this)
+            .setMessage(getString(R.string.err_gps_disabled))
+            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Navigate the user to location settings
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            })
+            .create();
+        dialog.show();
     }
 
     @Override
@@ -220,9 +218,9 @@ public class ResultsActivity extends AppCompatActivity {
             lblTime.setText(format.format(date));
             lblTime.setTypeface(null, Typeface.NORMAL);
         } else {
-            lblLatLon.setText("n/a");
-            lblAccuracy.setText("n/a");
-            lblTime.setText("n/a");
+            lblLatLon.setText(R.string.n_a);
+            lblAccuracy.setText(R.string.n_a);
+            lblTime.setText(R.string.n_a);
         }
     }
 
@@ -249,12 +247,12 @@ public class ResultsActivity extends AppCompatActivity {
         serverAccessor.saveSoilSampleData(gssid, latitude, longitude, sampleDepth, sampleExtension, timestamp, new ServerAccessorCallback() {
             @Override
             public void onSuccess() {
-                Notifier.showToastMessage(getApplicationContext(), LabelManager.soilUpdateSuccess);
+                Notifier.showToastMessage(getApplicationContext(), getString(R.string.soil_update_success));
             }
 
             @Override
             public void onFailure() {
-                Notifier.showToastMessage(getApplicationContext(), ErrorManager.errSoilSampleUpdateFailed);
+                Notifier.showToastMessage(getApplicationContext(), getString(R.string.err_soil_sample_update_failed));
             }
         });
     }
@@ -263,12 +261,12 @@ public class ResultsActivity extends AppCompatActivity {
         serverAccessor.saveMaizeYieldData(gssid, lat, lon, timestamp, maize, new ServerAccessorCallback() {
             @Override
             public void onSuccess() {
-                Notifier.showToastMessage(getApplicationContext(), LabelManager.yieldUpdateSuccess);
+                Notifier.showToastMessage(ResultsActivity.this, getString(R.string.yield_update_success));
             }
 
             @Override
             public void onFailure() {
-                Notifier.showToastMessage(getApplicationContext(), ErrorManager.errYieldUpdateFailed);
+                Notifier.showToastMessage(ResultsActivity.this, getString(R.string.err_yield_update_failed));
             }
         });
     }

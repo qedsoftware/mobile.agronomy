@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.crops.Maize;
-import com.afsis.yieldestimator.util.ErrorManager;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.parse.ParseException;

@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import com.afsis.yieldestimator.R;
 import com.afsis.yieldestimator.crops.Maize;
 import com.afsis.yieldestimator.crops.MaizeGrowthStage;
-import com.afsis.yieldestimator.util.ErrorManager;
 import com.afsis.yieldestimator.util.Notifier;
 
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 String kernels = txtKernelsPerRow.getText().toString().trim();
                 MaizeGrowthStage stage = (MaizeGrowthStage) spinGrowthStage.getSelectedItem();
                 if (cobs.isEmpty() || rows.isEmpty() || kernels.isEmpty() || stage == null) {
-                    Notifier.showToastMessage(getApplicationContext(), ErrorManager.errFieldsEmpty);
+                    Notifier.showToastMessage(getApplicationContext(), getString(R.string.err_fields_empty));
                 } else {
                     // Estimate the yield
                     maize.setCobsPerUnitArea(Integer.parseInt(cobs));

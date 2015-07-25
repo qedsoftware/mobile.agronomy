@@ -12,7 +12,6 @@ public class ServerAccessor {
         dbAccessor.saveMaizeYieldData(gssid, latitude, longitude, timestamp, maize, cb);
     }
 
-
     public void saveSoilSampleData(GSSID gssid,double latitude, double longitude, int sampleDepth, int sampleExtension, long timestamp, ServerAccessorCallback cb) {
         dbAccessor.saveSoilSampleData(gssid,latitude,longitude, sampleDepth, sampleExtension, timestamp, cb);
     }
