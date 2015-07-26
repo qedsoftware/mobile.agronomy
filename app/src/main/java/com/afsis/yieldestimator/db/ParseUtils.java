@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.africasoils.gssid.GSSID;
 import com.afsis.yieldestimator.crops.Maize;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.parse.ParseException;
@@ -24,6 +25,7 @@ public class ParseUtils implements DBAccessor {
     private String MAIZE_GROWTH_STAGE = "MaizeGrowthStage";
     private String LATITUDE = "Latitude";
     private String LONGITUDE = "Longitude";
+    private String GEOPOINT = "GeoPoint";
     private String TIMESTAMP = "Timestamp";
     private String GSSID = "GSSID";
     private String SAMPLE_DEPTH = "SampleDepth";
@@ -38,6 +40,8 @@ public class ParseUtils implements DBAccessor {
         // TODO: if old, retrieve and update
         final ParseObject po = new ParseObject(OBJ_MAIZE_YIELD);
         po.put(GSSID, gssid.bytes());
+        ParseGeoPoint parseGeoPoint = new ParseGeoPoint(latitude, longitude);
+        po.put(GEOPOINT, parseGeoPoint);
         po.put(LATITUDE, latitude);
         po.put(LONGITUDE, longitude);
         po.put(TIMESTAMP, timestamp);
@@ -71,6 +75,8 @@ public class ParseUtils implements DBAccessor {
         // TODO: if old, retrieve and update
         final ParseObject po = new ParseObject(OBJ_SOIL_SAMPLE);
         po.put(GSSID, gssid.bytes());
+        ParseGeoPoint parseGeoPoint = new ParseGeoPoint(latitude, longitude);
+        po.put(GEOPOINT, parseGeoPoint);
         po.put(LATITUDE,latitude);
         po.put(LONGITUDE, longitude);
         po.put(TIMESTAMP, timestamp);
